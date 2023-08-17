@@ -1,7 +1,7 @@
-local function getClusterAroundInstance<T>(instance: Instance, predicate: () -> T): number
+local function getClusterAroundInstance<T>(instance: Instance, predicate: () -> ({ T })): number
 	assert(type(predicate) == "function", `Predicate should be function; got {type(predicate)}`)
-	local instances: T = predicate()
-	local originPosition = extractPosition(instance)
+	local instances: { T } = predicate()
+	local originPosition: Vector3 = extractPosition(instance)
 
 	local cluster = 0
 	for _, instance in instances do
